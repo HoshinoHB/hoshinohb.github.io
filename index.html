@@ -44,7 +44,7 @@
             font-size: 24px;
             cursor: pointer;
             z-index: 100;
-            transition: all 0.3s;
+            transition: all 0.3;
             color: #fff;
             font-weight: bold;
             user-select: none;
@@ -77,7 +77,6 @@
             height: 100%;
             object-fit: cover;
         }
-        /* 全屏模式样式 */
         .fullscreen {
             position: fixed !important;
             top: 0 !important;
@@ -98,7 +97,6 @@
             right: 32px;
             font-size: 28px;
         }
-        /* PC端布局 */
         @media (min-width: 768px) {
             .platform-wrap {
                 display: grid;
@@ -117,7 +115,6 @@
                 display: block;
             }
         }
-        /* 移动端布局 */
         @media (max-width: 767px) {
             .platform-wrap {
                 display: flex;
@@ -170,153 +167,93 @@
     </style>
 </head>
 <body>
-    <!-- 大标题 -->
     <h1 class="title text-[clamp(2.5rem,6vw,4rem)] font-bold text-center py-8">
         HoshinoHB的粉丝墙
     </h1>
-    <!-- UP主头像 -->
     <div class="flex justify-center mb-8">
         <div class="up-main w-44 h-44 rounded-full flex items-center justify-center">
             <img src="up-avatar.png" alt="UP主" class="w-36 h-36 rounded-full object-cover">
         </div>
     </div>
-    <!-- 平台跳转链接 -->
     <div class="flex justify-around max-w-5xl mx-auto mb-12 px-8">
         <a href="https://b23.tv/Ck9wLL1" target="_blank" class="link-text">UP主B站</a>
         <a href="https://v.douyin.com/EWF0B9tiWWU/" target="_blank" class="link-text">UP主抖音</a>
     </div>
-    <!-- 两大平台粉丝区 -->
     <div class="platform-wrap">
-        <!-- B站粉色区块 -->
         <div class="bili-box relative">
             <div class="expand-btn">↖↘</div>
             <div class="fans-grid bili-fans-grid"></div>
         </div>
-        <!-- 抖音黑色区块 -->
         <div class="douyin-box relative">
             <div class="expand-btn">↖↘</div>
             <div class="fans-grid douyin-fans-grid"></div>
         </div>
     </div>
-    <!-- PC端页码指示器 -->
     <div class="page-indicator">B站：<span id="biliPage">1</span> / <span id="biliTotal">1</span> | 抖音：<span id="douyinPage">1</span> / <span id="douyinTotal">1</span></div>
-    <!-- 底部版权 -->
     <footer>© HoshinoHB 2026 | <a href="https://github.com" target="_blank">GitHub提供服务</a></footer>
-
     <script>
-        // ============= 两个平台 完全独立粉丝配置 =============
-        // B站专属粉丝列表
         const biliFansList = [
-    {
-        "img": "https://i1.hdslb.com/bfs/face/c8f8c736b8711c0a4309aca0aaa22d457ba974b0.jpg@168w_168h_1c.webp",
-        "link": "https://m.bilibili.com/space/3546698202745523?plat_id=1&share_from=space&share_medium=android&share_plat=android&share_session_id=d622585e-7077-4981-afb5-26a320f46e3e&share_source=COPY&share_tag=s_i&timestamp=1780117919&unique_k=81Ompuy"
-        "img": "https://i0.hdslb.com/bfs/face/91411db377b344a06d500cc32a993c325c1579fe.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/Y8FS7a5"
-        "img": "https://i0.hdslb.com/bfs/face/37ea053959bbf57adb496cd6a9ac280384c7b761.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/07xyW8u"
-        "img": "https://i0.hdslb.com/bfs/face/803d6d09537aa1efaa205d82890cd126115124d4.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/HqlMrBF"
-        "img": "https://i0.hdslb.com/bfs/face/a961ef8b271e187a6dfab17f40d64971174d1f56.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/5xaaXpE"
-        "img": "https://i0.hdslb.com/bfs/face/b5b9297dcda21db2da207153c56bb73e25c6939f.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/aQJ6ahr"
-        "img": "https://i0.hdslb.com/bfs/face/c34c0c63c13c0c6fe4b1d1f26c55f76e995a395b.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/eMRdvKA"
-        "img": "https://i0.hdslb.com/bfs/face/ee20bd35db718a62a619f68d3e641b0f401c6fc8.jpg@168w_168h_1c.webp",
-        "<img src="up-avatar.png" "
-        "img": "https://i0.hdslb.com/bfs/face/ee20bd35db718a62a619f68d3e641b0f401c6fc8.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/8XEQado"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/5fe4b344d7aff5fbc1c2be1ceb7f0cdc7300eaf1.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/Z5yZKhS"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/5fe4b344d7aff5fbc1c2be1ceb7f0cdc7300eaf1.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/rQFCBei"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/846617af635c12402c963247928537ee4c671602.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/tDttk3H"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/846617af635c12402c963247928537ee4c671602.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/UVqHMrw"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/42d0aa8cb74b5458b8f2081025bfa56723346784.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/S5p6dGD"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/44a28ba5edec7e06951c39788f3d3efdcb179730.webp@168w_168h_1c.webp",
-        "link": "https://b23.tv/YUWFv3U"
-    },
-    {
-        "img": "https://i0.hdslb.com/bfs/face/178f6d0ee3f864ee8ca7093067cf4804feb04c03.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/ZoW55FK"
-        "img": "https://i0.hdslb.com/bfs/face/43caf183310dc5c3a3a1594f2e313c46c47a7216.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/Y4MbwM2"
-        "img": "https://i0.hdslb.com/bfs/face/7219634b369eb7f2556442e4f30da5896328673a.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/TeNKPs1"
-        "img": "https://i0.hdslb.com/bfs/face/95b77345ee49770832349454de248d06069341a9.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/DI4Gei6"
-        "img": "https://i0.hdslb.com/bfs/face/6ce9097db5e888cdfe904c363e6ca5766bcd2613.webp@168w_168h_1c.webp",
-        "link": "https://b23.tv/Hpi2p0D"
-        "img": "https://i0.hdslb.com/bfs/face/559e314fb3f639ead9882ee3a0505c2fd2b5d0c5.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/z5CTHDo"
-        "img": "https://i0.hdslb.com/bfs/face/202a5e7edafcf78582349983d6086cb6c3312dbc.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/9QlEPqs"
-        "img": "https://i0.hdslb.com/bfs/face/c6c2b00894e4d29769c27eaa029c467c12f5796d.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/xLIP4DO"
-        "img": "https://i0.hdslb.com/bfs/face/4957814001a3aa3eb7e4dad678b297c9a0303a21.webp@168w_168h_1c.webp",
-        "link": "https://b23.tv/yhOWLPJ"
-        "img": "https://i0.hdslb.com/bfs/face/b4966780c91f364f8539ec1425d6476b5f0d287b.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/80GKd1e"
-        "img": "https://i0.hdslb.com/bfs/face/f40889ef29219b5cffaf0a726c7953854b7aeab3.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/u3a7Mk3"
-        "img": "https://i0.hdslb.com/bfs/face/095606953fd809902eaeee69d9473c66d8913278.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/HPnXWQY"
-        "img": "https://i0.hdslb.com/bfs/face/f69b47758c9798d17828d148b39514e168a0495e.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/pprt0NT"
-        "img": "https://i0.hdslb.com/bfs/face/32ea026b9f52947c492dc908ff4f0617977d9bd2.jpg@168w_168h_1c.webp",
-        "link": "https://b23.tv/jpIubLJ"
-    }
-        // 抖音专属粉丝列表
-        const douyinFansList = [
-            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813_o4EMfA9AEAAfXIAKAnAg3EiXDCFlpuCDrOjzy7~c5_300x300.jpeg?from=2956013662", link:"https://www.douyin.com/user/MS4wLjABAAAAnADhFGrYU-0QK0C3_YtlMyFjp4tZU_2qcohH4f0xiC4"},
-            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813c001_o4TKiYwwgm7eAEsyzAICsdiCAHABCPf8CJAvBA~c5_300x300.jpeg?from=2956013662", link:"https://www.douyin.com/user/MS4wLjABAAAAb8AYeSOuk9pqWEkmY3BjXvUd77vWiIXYlW0LuPgyV3VP2YJbFq0MJbdtLsm0WAtR"},
-            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813c000-ce_oAWobAIccoA4rEQpH7FfECwDOjfAdOIm9AD5AH~c5_300x300.jpeg?from=2956013662", link:"https://www.douyin.com/user/MS4wLjABAAAAnDZvhZSQWl2jKMJ3Pd1r0m6uUJ_JcrurlnD3BPhaWuzZoxdDHtllz7Nq8ytmqjDO"},
-            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_7c9b926585d8696b35c3806a34a8df09.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAFduWASKNuKP2TpsCB3ZlonpuaEWmLhgy6xOcIdfZUrJnzv0JbRsyO0rkseVyxJDU?did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAFduWASKNuKP2TpsCB3ZlonpuaEWmLhgy6xOcIdfZUrJnzv0JbRsyO0rkseVyxJDU&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&timestamp=1780117007&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22eb264cdec9f841b29c0d9cc9c0a012e4%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117007882&activity_info=%7B%22social_author_id%22%3A%223309951294909511%22%2C%22social_share_id%22%3A%221185729045343747_1780117007014%22%2C%22social_share_time%22%3A%221780117007%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_ogTI9LoZpEeAAAE1uEyFQDtEIQDASSAekwfB24.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAWDQ45_EMbFErZRM6GmPdT6AItlfVVamCk8VCkI8zkiPmoyMZoFpq5TVN2FR4pXI5?u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAWDQ45_EMbFErZRM6GmPdT6AItlfVVamCk8VCkI8zkiPmoyMZoFpq5TVN2FR4pXI5&from_ssr=1&from_aid=1128&timestamp=1780117011&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22b0186b3d8a7d4a4fbe5030fff4e90449%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117012553&activity_info=%7B%22social_author_id%22%3A%222101862806335191%22%2C%22social_share_id%22%3A%221185729045343747_1780117011751%22%2C%22social_share_time%22%3A%221780117011%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_oQAENICQDbgjaCUbgEfYAQAAkFG6AqAA1nq9fj.jpeg?from=2956013662", link:"Didn'tfindit.png"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4We4ciD5AExujDOAn51HagEBfA2iAAJNCA0YI.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAApllYZjyUS1WNVHXolrr0X-bsKdHEOHRsJhLiWr0T4EZ5ZBr62dy_ulTtZtWSKcdI?did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAApllYZjyUS1WNVHXolrr0X-bsKdHEOHRsJhLiWr0T4EZ5ZBr62dy_ulTtZtWSKcdI&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&timestamp=1780117033&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22b34c4053ccc8415a8b193e3b50339537%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117034663&activity_info=%7B%22social_author_id%22%3A%223340793644321332%22%2C%22social_share_id%22%3A%221185729045343747_1780117033812%22%2C%22social_share_time%22%3A%221780117033%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_oAINiAZIBlAtjXmzuwjWPAiIA0CvXiKEAYDqQ.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAavGdmrDLhI2SGTjjujtyvX_kMu1Q-800ULrWDY5g4gw_bIKmZQID3_uRkFMRJgPm?u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAavGdmrDLhI2SGTjjujtyvX_kMu1Q-800ULrWDY5g4gw_bIKmZQID3_uRkFMRJgPm&from_ssr=1&from_aid=1128&timestamp=1780117040&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22fd49815a6971467b943a38ebed7eb464%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117041795&activity_info=%7B%22social_author_id%22%3A%223237401723153979%22%2C%22social_share_id%22%3A%221185729045343747_1780117040960%22%2C%22social_share_time%22%3A%221780117040%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o0Hp6ADREEEEADrOfAAwINAFKLoTaLfFVhL9es.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAA5onqBxeY8RdebjuCKmFDyWqQkFYUjRn_QVf83Vvr2Bv02gw8n82XX0pPHAH-KmsH?with_sec_did=1&sec_uid=MS4wLjABAAAA5onqBxeY8RdebjuCKmFDyWqQkFYUjRn_QVf83Vvr2Bv02gw8n82XX0pPHAH-KmsH&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&timestamp=1780117050&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22e8b5a88fb9fb44c2b920094d386e0e41%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117051504&activity_info=%7B%22social_author_id%22%3A%222659063484394407%22%2C%22social_share_id%22%3A%221185729045343747_1780117050668%22%2C%22social_share_time%22%3A%221780117050%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4YV4zgyfAID9iG1AD9nnXCisEACFAATutAQep.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAcRYZD52Ysy8n_pSM3kDbYC5QqM-HZM7Xl61Oxhk9LBb3yiuXGhhgvotV2Uyfu-uK?from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAcRYZD52Ysy8n_pSM3kDbYC5QqM-HZM7Xl61Oxhk9LBb3yiuXGhhgvotV2Uyfu-uK&timestamp=1780117055&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22d11e8079e25943239c396960f69c16ae%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117056457&activity_info=%7B%22social_author_id%22%3A%224022434058745148%22%2C%22social_share_id%22%3A%221185729045343747_1780117055572%22%2C%22social_share_time%22%3A%221780117055%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_o8162fAWEElZqDAAxHqAXDbCFIiDCHAfgAPFA9.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAgUExawy6zq4ET8aQszpqmcQi_YYfN8-OuJI0rHrXzvTVOIwqP9CXypMlQpB6GQV5?sec_uid=MS4wLjABAAAAgUExawy6zq4ET8aQszpqmcQi_YYfN8-OuJI0rHrXzvTVOIwqP9CXypMlQpB6GQV5&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117114&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22b32675b38f0a48d5ab9cf1e087f7d025%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117115838&activity_info=%7B%22social_author_id%22%3A%223653020359852650%22%2C%22social_share_id%22%3A%221185729045343747_1780117114907%22%2C%22social_share_time%22%3A%221780117114%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4EMfA9AEAAfXIAKAnAg3EiXDCFlpuCDrOjzy7.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAnADhFGrYU-0QK0C3_YtlMyFjp4tZU_2qcohH4f0xiC4?sec_uid=MS4wLjABAAAAnADhFGrYU-0QK0C3_YtlMyFjp4tZU_2qcohH4f0xiC4&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117137&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22dd9954ef66564cf59ebfadbade7008a8%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117138795&activity_info=%7B%22social_author_id%22%3A%22664543020460798%22%2C%22social_share_id%22%3A%221185729045343747_1780117137894%22%2C%22social_share_time%22%3A%221780117137%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oMFfA6eBSXIAaBXAQTQMQT8ogAUfgSSzJQKbO7.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAX9quHlDTpkf_xXjZcMIirAUlI18dKt-fopeHo0WL-2qet09rW339dZO5FEI1YZuG?sec_uid=MS4wLjABAAAAX9quHlDTpkf_xXjZcMIirAUlI18dKt-fopeHo0WL-2qet09rW339dZO5FEI1YZuG&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117149&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22ae938b1236e5479d87aae3da34c92d73%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117150914&activity_info=%7B%22social_author_id%22%3A%223613449220793536%22%2C%22social_share_id%22%3A%221185729045343747_1780117149980%22%2C%22social_share_time%22%3A%221780117149%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_osA2CA9tQnPPRbIibvkmp9M0BAIahicS2ARAE.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAXEsDhgdj3N5JPhKQ3Fa4eCdlgNyD2TNnl4u5kYFw4Ho?with_sec_did=1&sec_uid=MS4wLjABAAAAXEsDhgdj3N5JPhKQ3Fa4eCdlgNyD2TNnl4u5kYFw4Ho&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&timestamp=1780117157&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%225c76dc1974524ed1995a78631648ee12%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117158245&activity_info=%7B%22social_author_id%22%3A%22105025270739%22%2C%22social_share_id%22%3A%221185729045343747_1780117157377%22%2C%22social_share_time%22%3A%221780117157%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_ogGffnenAwgIMLAH2iWRAfoEIfQEIIsAtgEA9w.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAHaUlRcgaH2QK1umHSJZm1DBl0jnEDF9U9BudPf2K8l4?sec_uid=MS4wLjABAAAAHaUlRcgaH2QK1umHSJZm1DBl0jnEDF9U9BudPf2K8l4&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117169&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%224f1ff1a8342b4a1a96b23494d5c75ddf%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117169999&activity_info=%7B%22social_author_id%22%3A%22787681543195368%22%2C%22social_share_id%22%3A%221185729045343747_1780117169131%22%2C%22social_share_time%22%3A%221780117169%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_ospdIDgiZPxPABkoATxU7AIot7uAEg01AMiyh.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAEBIlP6F5KUUhSC70-7lOagZ8wcbhRBSjyO67Lsp5k-k?u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAEBIlP6F5KUUhSC70-7lOagZ8wcbhRBSjyO67Lsp5k-k&from_ssr=1&from_aid=1128&timestamp=1780117182&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%220511fc2164084f198b63d29fa777461a%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117183215&activity_info=%7B%22social_author_id%22%3A%22263470793097255%22%2C%22social_share_id%22%3A%221185729045343747_1780117182329%22%2C%22social_share_time%22%3A%221780117182%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o0k3xigtfAEGmFCwAD9pTXCY0EANFAAdP9AI9e.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAPtGmnzziCAdcw-ZmLgwwQIyZ9SZc_ouj_LOu7qu4XLE?iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAPtGmnzziCAdcw-ZmLgwwQIyZ9SZc_ouj_LOu7qu4XLE&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&timestamp=1780117187&ecom_share_track_params=%7B%22is_ec_shopping%22%3A%221%22%2C%22secuid%22%3A%22MS4wLjABAAAAoJZFAoBybfRZewkYLxjQy7bi0vVGIs1ra4sR0kXfgEarv2AGpRsnCtt2S-xj94-r%22%2C%22enter_from%22%3A%22others_homepage%22%2C%22share_previous_page%22%3A%22others_homepage%22%2C%22share_action_type%22%3A%22click%22%7D&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%226a1c6288f93843e6af7d998fc6174754%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117188302&activity_info=%7B%22social_author_id%22%3A%2285612831740%22%2C%22social_share_id%22%3A%221185729045343747_1780117187537%22%2C%22social_share_time%22%3A%221780117187%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_oky2PuPwrBcgAAA3F0AwPvEAiAbiaIqIgICCn.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAJR8PiS3EwtUEi6Xw3hkmoriIkcasNIcGIIgbiCGuMpRTF2R30gvBcYbmcOwTBve4?from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAJR8PiS3EwtUEi6Xw3hkmoriIkcasNIcGIIgbiCGuMpRTF2R30gvBcYbmcOwTBve4&from_ssr=1&timestamp=1780117199&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22e40974ec41e94ace92151687cd56487b%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117200105&activity_info=%7B%22social_author_id%22%3A%222729421920022976%22%2C%22social_share_id%22%3A%221185729045343747_1780117199203%22%2C%22social_share_time%22%3A%221780117199%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_ocDPANFPQCzpwIERhf9mAf7Ar0Xg8gyPAlAAFp.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAA03ZkdvU4Dw12zy1fqzHwptJDbUOi4PTTrLv9NhTD5EWgIyYn9wImsqMxdnE1psvu?sec_uid=MS4wLjABAAAA03ZkdvU4Dw12zy1fqzHwptJDbUOi4PTTrLv9NhTD5EWgIyYn9wImsqMxdnE1psvu&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117213&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%2264065159e0ba4505b2c0824e9bdbfe41%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117213855&activity_info=%7B%22social_author_id%22%3A%221121930544953022%22%2C%22social_share_id%22%3A%221185729045343747_1780117213004%22%2C%22social_share_time%22%3A%221780117213%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_oADEAAyyiiAzDcAgIeDBNY2QeMrAuwznwAFPCm.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAi0W9vOeAgN1RtZNIdEKzA1BEQZ-rJbtyA2S_sp4rgi8?with_sec_did=1&sec_uid=MS4wLjABAAAAi0W9vOeAgN1RtZNIdEKzA1BEQZ-rJbtyA2S_sp4rgi8&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&timestamp=1780117242&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%2257c03f3f510545e2a30d6ec828e1bd2a%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117243343&activity_info=%7B%22social_author_id%22%3A%22242308579591488%22%2C%22social_share_id%22%3A%221185729045343747_1780117242431%22%2C%22social_share_time%22%3A%221780117242%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oMB3IeAopDA9WlANASFhE9oAFAbwsEesQcfpiE.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAmEt1dICdObCBvdsxR65cvmtvUcDbaDq2actaBcm4mH4ajGmjwl-swtMpEGSoa2Al?sec_uid=MS4wLjABAAAAmEt1dICdObCBvdsxR65cvmtvUcDbaDq2actaBcm4mH4ajGmjwl-swtMpEGSoa2Al&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&timestamp=1780117307&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%2253bcb0b602724bc0b9427312ab7a5a67%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117308293&activity_info=%7B%22social_author_id%22%3A%224424911757524206%22%2C%22social_share_id%22%3A%221185729045343747_1780117307458%22%2C%22social_share_time%22%3A%221780117307%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_6fb8bb8e38d2653eefb461b66d318be5.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAANgbiwRhNfn7-uctE2TPmvUiSXuSd3fxv1DfGaW4ONO0dOxyv4Ak7--pZ3Elzk8mt?from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAANgbiwRhNfn7-uctE2TPmvUiSXuSd3fxv1DfGaW4ONO0dOxyv4Ak7--pZ3Elzk8mt&from_ssr=1&timestamp=1780117316&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22b3b3a2c8e6ef4ccb8b823217169d1b18%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117316938&activity_info=%7B%22social_author_id%22%3A%223799513710728327%22%2C%22social_share_id%22%3A%221185729045343747_1780117316102%22%2C%22social_share_time%22%3A%221780117316%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o0f8B9PAEACiACwq1jBpn0IBoEAQ26eJPiBABC.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAA__TUryu6Sw_KbcF03zB_oXMI6BtO2IpMFcehrX7jhhWFMY5CRdK46z6Uz3IPafIv?from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAA__TUryu6Sw_KbcF03zB_oXMI6BtO2IpMFcehrX7jhhWFMY5CRdK46z6Uz3IPafIv&from_ssr=1&timestamp=1780117329&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%225ba2e07eb8f844219094f4da82610bb8%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117330536&activity_info=%7B%22social_author_id%22%3A%221678284229984012%22%2C%22social_share_id%22%3A%221185729045343747_1780117329735%22%2C%22social_share_time%22%3A%221780117329%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o06PZvXhOttAidCAQEBAaA7PqWAIMv6BiFVB0.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAA44D3qjHadl9EGIubpcW90HGJr5WZIBUqOEaZ-hhmaz1xnfdaeqD9C4E1ZXbJuozA?iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAA44D3qjHadl9EGIubpcW90HGJr5WZIBUqOEaZ-hhmaz1xnfdaeqD9C4E1ZXbJuozA&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&timestamp=1780117352&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22a0fb857debcb46e1b4be34439d6f5ca8%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117352895&activity_info=%7B%22social_author_id%22%3A%223591461520810451%22%2C%22social_share_id%22%3A%221185729045343747_1780117352077%22%2C%22social_share_time%22%3A%221780117352%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4Q8j7ETc3ef5LuoKgOGzAABEVBeAxGATgAHIv.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAA2kA8KYaSjoIVSxQTwcgTW3OVFfWwZ-dmH2eqcuVJ2MNghvGbbitDOhUH-cn0Rry2?with_sec_did=1&sec_uid=MS4wLjABAAAA2kA8KYaSjoIVSxQTwcgTW3OVFfWwZ-dmH2eqcuVJ2MNghvGbbitDOhUH-cn0Rry2&from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&timestamp=1780117404&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%225760dbe45e54465db1871473ed291493%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117405294&activity_info=%7B%22social_author_id%22%3A%223784949162322397%22%2C%22social_share_id%22%3A%221185729045343747_1780117404376%22%2C%22social_share_time%22%3A%221780117404%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
-            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oseV7lc9FETmAb4Eip2w9fB6iTfAAE6ADIyvAE.jpeg?from=2956013662", link:"https://www.iesdouyin.com/share/user/MS4wLjABAAAAdAWuCwsa0kFdpLmxl45i6i3nZJUt-jOChH3xT8Vg3296FO6RdmG2EV9xF1jWii9K?from_ssr=1&from_aid=1128&u_code=15e76d9kla7m&did=MS4wLjABAAAAoWqdRaTZM6560qrDFgCwsEYvw_eMyx-5e2eDfwpMux9S--Yz8pD-fGfZjlB3GVD_&iid=MS4wLjABAAAAkHWG1-HqwjTvfslVi5RbZ4vUco1M4WmmYJwgGWnYr7_Fl3Uh8rduLJma0S76vIpz&with_sec_did=1&sec_uid=MS4wLjABAAAAdAWuCwsa0kFdpLmxl45i6i3nZJUt-jOChH3xT8Vg3296FO6RdmG2EV9xF1jWii9K&timestamp=1780117427&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%223fe5419d542d416880f18fda955844cb%22%2C%22from_user_id%22%3A1185729045343747%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22mutual_list%22%2C%22personal_enter_method%22%3A%22%22%7D&ug_share_id=fe967b4848e4c_1780117428102&activity_info=%7B%22social_author_id%22%3A%222122521570989322%22%2C%22social_share_id%22%3A%221185729045343747_1780117427301%22%2C%22social_share_time%22%3A%221780117427%22%2C%22social_share_user_id%22%3A%221185729045343747%22%7D"},
+            {img:"https://i1.hdslb.com/bfs/face/c8f8c736b8711c0a4309aca0aaa22d457ba974b0.jpg@168w_168h_1c.webp",link:"https://m.bilibili.com/space/3546698202745523?plat_id=1&share_from=space&share_medium=android&share_plat=android&share_session_id=d622585e-7077-4981-afb5-26a320f46e3e&share_source=COPY&share_tag=s_i&timestamp=1780117919&unique_k=81Ompuy"},
+            {img:"https://i0.hdslb.com/bfs/face/91411db377b344a06d500cc32a993c325c1579fe.jpg@168w_168h_1c.webp",link:"https://b23.tv/Y8FS7a5"},
+            {img:"https://i0.hdslb.com/bfs/face/37ea053959bbf57adb496cd6a9ac280384c7b761.jpg@168w_168h_1c.webp",link:"https://b23.tv/07xyW8u"},
+            {img:"https://i0.hdslb.com/bfs/face/803d6d09537aa1efaa205d82890cd126115124d4.jpg@168w_168h_1c.webp",link:"https://b23.tv/HqlMrBF"},
+            {img:"https://i0.hdslb.com/bfs/face/a961ef8b271e187a6dfab17f40d64971174d1f56.jpg@168w_168h_1c.webp",link:"https://b23.tv/5xaaXpE"},
+            {img:"https://i0.hdslb.com/bfs/face/b5b9297dcda21db2da207153c56bb73e25c6939f.jpg@168w_168h_1c.webp",link:"https://b23.tv/aQJ6ahr"},
+            {img:"https://i0.hdslb.com/bfs/face/c34c0c63c13c0c6fe4b1d1f26c55f76e995a395b.jpg@168w_168h_1c.webp",link:"https://b23.tv/eMRdvKA"},
+            {img:"https://i0.hdslb.com/bfs/face/ee20bd35db718a62a619f68d3e641b0f401c6fc8.jpg@168w_168h_1c.webp",link:"https://b23.tv/8XEQado"},
+            {img:"https://i0.hdslb.com/bfs/face/5fe4b344d7aff5fbc2c2be1ceb7f0cdc7300eaf1.jpg@168w_168h_1c.webp",link:"https://b23.tv/Z5yZKhS"},
+            {img:"https://i0.hdslb.com/bfs/face/5fe4b344d7aff5fbc2c2be1ceb7f0cdc7300eaf1.jpg@168w_168h_1c.webp",link:"https://b23.tv/rQFCBei"},
+            {img:"https://i0.hdslb.com/bfs/face/846617af635c12402c963247928537ee4c671602.jpg@168w_168h_1c.webp",link:"https://b23.tv/tDttk3H"},
+            {img:"https://i0.hdslb.com/bfs/face/846617af635c12402c963247928537ee4c671602.jpg@168w_168h_1c.webp",link:"https://b23.tv/UVqHMrw"},
+            {img:"https://i0.hdslb.com/bfs/face/42d0aa8cb74b5458b8f2081025bfa56723346784.jpg@168w_168h_1c.webp",link:"https://b23.tv/S5p6dGD"},
+            {img:"https://i0.hdslb.com/bfs/face/44a28ba5edec7e06951c39788f3d3efdcb179730.webp@168w_168h_1c.webp",link:"https://b23.tv/YUWFv3U"},
+            {img:"https://i0.hdslb.com/bfs/face/178f6d0ee3f864ee8ca7093067cf4804feb04c03.jpg@168w_168h_1c.webp",link:"https://b23.tv/ZoW55FK"},
+            {img:"https://i0.hdslb.com/bfs/face/43caf183310dc5c3a3a1594f2e313c46c47a7216.jpg@168w_168h_1c.webp",link:"https://b23.tv/Y4MbwM2"},
+            {img:"https://i0.hdslb.com/bfs/face/7219634b369eb7f2556442e4f30da5896328673a.jpg@168w_168h_1c.webp",link:"https://b23.tv/TeNKPs1"},
+            {img:"https://i0.hdslb.com/bfs/face/95b77345ee49770832349454de248d06069341a9.jpg@168w_168h_1c.webp",link:"https://b23.tv/DI4Gei6"},
+            {img:"https://i0.hdslb.com/bfs/face/6ce9097db5e888cdfe904c363e6ca5766bcd2613.webp@168w_168h_1c.webp",link:"https://b23.tv/Hpi2p0D"},
+            {img:"https://i0.hdslb.com/bfs/face/559e314fb3f639ead9882ee3a0505c2fd2b5d0c5.jpg@168w_168h_1c.webp",link:"https://b23.tv/z5CTHDo"},
+            {img:"https://i0.hdslb.com/bfs/face/202a5e7edafcf78582349983d6086cb6c3312dbc.jpg@168w_168h_1c.webp",link:"https://b23.tv/9QlEPqs"},
+            {img:"https://i0.hdslb.com/bfs/face/c6c2b00894e4d29769c27eaa029c467c12f5796d.jpg@168w_168h_1c.webp",link:"https://b23.tv/xLIP4DO"},
+            {img:"https://i0.hdslb.com/bfs/face/4957814001a3aa3eb7e4dad678b297c9a0303a21.webp@168w_168h_1c.webp",link:"https://b23.tv/yhOWLPJ"},
+            {img:"https://i0.hdslb.com/bfs/face/b4966780c91f364f8539ec1425d6476b5f0d287b.jpg@168w_168h_1c.webp",link:"https://b23.tv/80GKd1e"},
+            {img:"https://i0.hdslb.com/bfs/face/f40889ef29219b5cffaf0a026c7953854b7aeab3.jpg@168w_168h_1c.webp",link:"https://b23.tv/u3a7Mk3"},
+            {img:"https://i0.hdslb.com/bfs/face/095606953fd809902eaeee69d9473c66d8913278.jpg@168w_168h_1c.webp",link:"https://b23.tv/HPnXWQY"},
+            {img:"https://i0.hdslb.com/bfs/face/f69b47758c9798d17828d148b39514e168a0495e.jpg@168w_168h_1c.webp",link:"https://b23.tv/pprt0NT"},
+            {img:"https://i0.hdslb.com/bfs/face/32ea026b9f52947c492dc908ff4f0617977d9bd2.jpg@168w_168h_1c.webp",link:"https://b23.tv/jpIubLJ"}
         ];
-
+        const douyinFansList = [
+            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813_o4EMfA9AEAAfXIAKAnAg3EiXDCFlpuCDrOjzy7~c5_300x300.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAnADhFGrYU-0QK0C3_YtlMyFjp4tZU_2qcohH4f0xiC4"},
+            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813c001_o4TKiYwwgm7eAEsyzAICsdiCAHABCPf8CJAvBA~c5_300x300.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAb8AYeSOuk9pqWEkmY3BjXvUd77vWiIXYlW0LuPgyV3VP2YJbFq0MJbdtLsm0WAtR"},
+            {img:"https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-i-0813c000-ce_oAWobAIccoA4rEQpH7FfECwDOjfAdOIm9AD5AH~c5_300x300.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAnDZvhZSQWl2jKMJ3Pd1r0m6uUJ_JcrurlnD3BPhaWuzZoxdDHtllz7Nq8ytmqjDO"},
+            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_7c9b926585d8696b35c3806a34a8df09.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAFduWASKNuKP2TpsCB3ZlonpuaEWmLhgy6xOcIdfZUrJnzv0JbRsyO0rkseVyxJDU"},
+            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_ogTI9LoZpEeAAAE1uEyFQDtEIQDASSAekwfB24.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAWDQ45_EMbFErZRM6GmPdT6AItlfVVamCk8VCkI8zkiPmoyMZoFpq5TVN2FR4pXI5"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_oQAENICQDbgjaCUbgEfYAQAAkFG6AqAA1nq9fj.jpeg?from=2956013662",link:"Didn'tfindit.png"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4We4ciD5AExujDOAn51HagEBfA2iAAJNCA0YI.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAApllYZjyUS1WNVHXolrr0X-bsKdHEOHRsJhLiWr0T4EZ5ZBr62dy_ulTtZtWSKcdI"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_oAINiAZIBlAtjXmzuwjWPAiIA0CvXiKEAYDqQ.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAavGdmrDLhI2SGTjjujtyvX_kMu1Q-800ULrWDY5g4gw_bIKmZQID3_uRkFMRJgPm"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o0Hp6ADREEEEADrOfAAwINAFKLoTaLfFVhL9es.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAA5onqBxeY8RdebjuCKmFDyWqQkFYUjRn_QVf83Vvr2Bv02gw8n82XX0pPHAH-KmsH"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4YV4zgyfAID9iG1AD9nnXCisEACFAATutAQep.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAcRYZD52Ysy8n_pSM3kDbYC5QqM-HZM7Xl61Oxhk9LBb3yiuXGhhgvotV2Uyfu-uK"},
+            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_o8162fAWEElZqDAAxHqAXDbCFIiDCHAfgAPFA9.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAgUExawy6zq4ET8aQszpqmcQi_YYfN8-OuJI0rHrXzvTVOIwqP9CXypMlQpB6GQV5"},
+            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4EMfA9AEAAfXIAKAnAg3EiXDCFlpuCDrOjzy7.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAnADhFGrYU-0QK0C3_YtlMyFjp4tZU_2qcohH4f0xiC4"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oMFfA6eBSXIAaBXAQTQMQT8ogAUfgSSzJQKbO7.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAX9quHlDTpkf_xXjZcMIirAUlI18dKt-fopeHo0WL-2qet09rW339dZO5FEI1YZuG"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_osA2CA9tQnPPRbIibvkmp9M0BAIahicS2ARAE.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAXEsDhgdj3N5JPhKQ3Fa4eCdlgNyD2TNnl4u5kYFw4Ho"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_ogGffnenAwgIMLAH2iWRAfoEIfQEIIsAtgEA9w.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAHaUlRcgaH2QK1umHSJZm1DBl0jnEDF9U9BudPf2K8l4"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_ospdIDgiZPxPABkoATxU7AIot7uAEg01AMiyh.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAEBIlP6F5KUUhSC70-7lOagZ8wcbhRBSjyO67Lsp5k-k"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o0k3xigtfAEGmFCwAD9pTXCY0EANFAAdP9AI9e.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAPtGmnzziCAdcw-ZmLgwwQIyZ9SZc_ouj_LOu7qu4XLE"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c001_oky2PuPwrBcgAAA3F0AwPvEAiAbiaIqIgICCn.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAJR8PiS3EwtUEi6Xw3hkmoriIkcasNIcGIIgbiCGuMpRTF2R30gvBcYbmcOwTBve4"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_ocDPANFPQCzpwIERhf9mAf7Ar0Xg8gyPAlAAFp.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAA03ZkdvU4Dw12zy1fqzHwptJDbUOi4PTTrLv9NhTD5EWgIyYn9wImsqMxdnE1psvu"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_oADEAAyyiiAzDcAgIeDBNY2QeMrAuwznwAFPCm.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAi0W9vOeAgN1RtZNIdEKzA1BEQZ-rJbtyA2S_sp4rgi8"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oMB3IeAopDA9WlANASFhE9oAFAbwsEesQcfpiE.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAmEt1dICdObCBvdsxR65cvmtvUcDbaDq2actaBcm4mH4ajGmjwl-swtMpEGSoa2Al"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_6fb8bb8e38d2653eefb461b66d318be5.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAANgbiwRhNfn7-uctE2TPmvUiSXuSd3fxv1DfGaW4ONO0dOxyv4Ak7--pZ3Elzk8mt"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o0f8B9PAEACiACwq1jBpn0IBoEAQ26eJPiBABC.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAA__TUryu6Sw_KbcF03zB_oXMI6BtO2IpMFcehrX7jhhWFMY5CRdK46z6Uz3IPafIv"},
+            {img:"https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_o06PZvXhOttAidCAQEBAaA7PqWAIMv6BiFVB0.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAA44D3qjHadl9EGIubpcW90HGJr5WZIBUqOEaZ-hhmaz1xnfdaeqD9C4E1ZXbJuozA"},
+            {img:"https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813_o4Q8j7ETc3ef5LuoKgOGzAABEVBeAxGATgAHIv.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAA2kA8KYaSjoIVSxQTwcgTW3OVFfWwZ-dmH2eqcuVJ2MNghvGbbitDOhUH-cn0Rry2"},
+            {img:"https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-i-0813c000-ce_oseV7lc9FETmAb4Eip2w9fB6iTfAAE6ADIyvAE.jpeg?from=2956013662",link:"https://www.douyin.com/user/MS4wLjABAAAAdAWuCwsa0kFdpLmxl45i6i3nZJUt-jOChH3xT8Vg3296FO6RdmG2EV9xF1jWii9K"}
+        ];
         let biliPage = 1;
         let douyinPage = 1;
         const pcMax = 64;
         const mobileMax = 16;
-
-        // 单独渲染B站粉丝
         function renderBili() {
             const isMobile = window.innerWidth < 768;
             const perPage = isMobile ? mobileMax : pcMax;
@@ -328,14 +265,19 @@
             show.forEach(fan=>{
                 const a = document.createElement('a');
                 a.className = 'fans-card';
-                a.href = fan.link;
-                a.target = '_blank';
-                a.innerHTML = `<img src="${fan.img}" alt="粉丝">`;
+                // 判断链接是否有效
+                const isValidLink = fan.link && fan.link !== "" && !fan.link.includes("Didn'tfindit");
+                if (isValidLink) {
+                    a.href = fan.link;
+                    a.target = '_blank';
+                } else {
+                    a.href = "error.png";
+                    a.target = "_self";
+                }
+                a.innerHTML = `<img src="${fan.img}" alt="粉丝头像">`;
                 box.append(a);
             })
         }
-
-        // 单独渲染抖音粉丝
         function renderDouyin() {
             const isMobile = window.innerWidth < 768;
             const perPage = isMobile ? mobileMax : pcMax;
@@ -347,13 +289,19 @@
             show.forEach(fan=>{
                 const a = document.createElement('a');
                 a.className = 'fans-card';
-                a.href = fan.link;
-                a.target = '_blank';
-                a.innerHTML = `<img src="${fan.img}" alt="粉丝">`;
+                // 判断链接是否有效
+                const isValidLink = fan.link && fan.link !== "" && !fan.link.includes("Didn'tfindit");
+                if (isValidLink) {
+                    a.href = fan.link;
+                    a.target = '_blank';
+                } else {
+                    a.href = "error.png";
+                    a.target = "_self";
+                }
+                a.innerHTML = `<img src="${fan.img}" alt="粉丝头像">`;
                 box.append(a);
             })
         }
-
         let startX = 0;
         document.addEventListener('touchstart',e=>startX = e.touches[0].screenX);
         document.addEventListener('touchend',e=>{
@@ -361,13 +309,10 @@
             const move = startX - endX;
             const isMobile = window.innerWidth <768;
             const perPage = isMobile ? mobileMax : pcMax;
-
-            // 左滑翻下一页
             if(move >60){
                 if(biliPage < Math.ceil(biliFansList.length/perPage)) biliPage++;
                 if(douyinPage < Math.ceil(douyinFansList.length/perPage)) douyinPage++;
             }
-            // 右滑翻上一页
             if(move <-60){
                 if(biliPage>1) biliPage--;
                 if(douyinPage>1) douyinPage--;
@@ -375,20 +320,16 @@
             renderBili();renderDouyin();
             updatePageNum();
         })
-
         function updatePageNum(){
             const isMobile = window.innerWidth <768;
             const perPage = isMobile ? mobileMax : pcMax;
             const totalBili = Math.ceil(biliFansList.length/perPage);
             const totalDouyin = Math.ceil(douyinFansList.length/perPage);
-            
             document.getElementById('biliPage').innerText = biliPage;
             document.getElementById('biliTotal').innerText = totalBili;
             document.getElementById('douyinPage').innerText = douyinPage;
             document.getElementById('douyinTotal').innerText = totalDouyin;
         }
-
-        // 全屏放大切换
         document.querySelectorAll('.expand-btn').forEach(btn=>{
             btn.onclick = function(){
                 const wrap = this.parentElement;
@@ -397,13 +338,11 @@
                 document.body.style.overflow = wrap.classList.contains('fullscreen')?'hidden':'';
             }
         })
-
         function init() {
             renderBili();
             renderDouyin();
             updatePageNum();
         }
-
         window.onload = init;
         window.onresize = init;
     </script>
